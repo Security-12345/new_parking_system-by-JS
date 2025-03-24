@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rainbow Village - Community Rules & Information</title>
+  <link rel="stylesheet" href="styles2.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  <header class="header">
+    <div class="header-content">
+      <div class="logo">
+        <i class="fas fa-home"></i>
+        <h1>Rainbow Village</h1>
+      </div>
+      <button class="nav-toggle" onclick="toggleNav()">☰</button>
+      <nav class="nav-menu">
+        <button onclick="window.location.href='index.html'">Permits</button>
+        <button onclick="showSection('rules')">Rules</button>
+        <button onclick="openModal('about')">About</button>
+        <button onclick="openModal('contacts')">Contacts</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Rules Section -->
+    <section id="rules" class="section active">
+      <div class="container">
+        <h2>Community Rules & Information</h2>
+        <p>Guidelines for a harmonious Rainbow Village</p>
+        <div class="rules-container">
+          <!-- Coronavirus Guidelines -->
+          <div class="rule-section">
+            <h3 onclick="toggleRule(this)">Coronavirus Guidelines <i class="fas fa-chevron-down"></i></h3>
+            <div class="rule-content">
+              <ul>
+                <li><strong>Symptom Monitoring:</strong> Watch for fever, cough, shortness of breath, sore throat, difficulty breathing, or loss of taste/smell.</li>
+                <li><strong>Self-Isolation:</strong> Self-isolate if sick after travel or exposure; seek medical care if symptoms worsen.</li>
+                <li><strong>Protective Measures:</strong> Wash hands frequently, avoid touching face, cough into elbow.</li>
+                <li><strong>Travel Restrictions:</strong> Self-isolate for 14 days after returning from outside Canada; seek medical care if needed.</li>
+                <li><strong>Emergency Contact:</strong> Toronto Public Health (416-392-1250) or a medical practitioner.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Party Room Rental -->
+          <div class="rule-section">
+            <h3 onclick="toggleRule(this)">Party Room Rental <i class="fas fa-chevron-down"></i></h3>
+            <div class="rule-content">
+              <p><strong>Rooms:</strong> Gathering Place A or B (up to 40 people)</p>
+              <p><strong>Cost:</strong> $75 to rent, $250 deposit (cheques to MTCC 929 for A, 936 for B)</p>
+              <p><strong>Time:</strong> Ends at midnight, clean by 12:30 AM</p>
+              <h4>Easy Rules:</h4>
+              <ol>
+                <li>Up to 40 guests allowed by city rules.</li>
+                <li>Only residents can book the room.</li>
+                <li>You pay for any damage to the room or property.</li>
+                <li>Keep your guests well-behaved, or we’ll step in.</li>
+                <li>Pay $75 to rent and $250 deposit when booking. Deposit back in 3 days if no issues.</li>
+                <li>Give a guest list and car plates 1 day before, or the event’s off.</li>
+                <li>You cover any legal issues or injuries; we’re not responsible.</li>
+                <li>We don’t cover lost items or injuries.</li>
+                <li>No decorations on walls—damage comes out of your deposit or bill.</li>
+                <li>No tape, glue, nails, or pins on walls or ceiling.</li>
+                <li>Stay in the rented room; no other areas allowed.</li>
+                <li>You guide guests—no signs or open doors.</li>
+                <li>Get any permits (like for alcohol) yourself and show us before.</li>
+                <li>Cancel 7 days ahead, or pay $100.</li>
+                <li>No smoking inside.</li>
+                <li>No selling tickets; only family events like birthdays (no bachelor parties).</li>
+                <li>Clean up before your time ends.</li>
+                <li>No bookings on Christmas Eve, Christmas, New Year’s Eve, or New Year’s Day.</li>
+                <li>Keep furniture off the dance floor.</li>
+                <li>Guests park at P1 garage—not under daycare or recreation center (fire rules).</li>
+              </ol>
+              <p><strong>If You Stay Late:</strong> $100 fine until 1:30 AM, $200 after (1 AM is the latest).</p>
+              <h4>Security Rules (Initial):</h4>
+              <ul>
+                <li>(__) Take out all your stuff (decor, food, trash), or pay for extra cleaning.</li>
+                <li>(__) Follow security’s instructions.</li>
+              </ul>
+              <p><strong>Sign Here:</strong> I, [Your Name], from Suite [Number] in Building [A/B], agree to these rules.</p>
+              <p><strong>Date:</strong> ___ day of _____, 20__ | <strong>Signature:</strong> ________________</p>
+              <p><strong>Deposit Back:</strong> I got my $250 cheque on ___ day of _____, 20__.</p>
+              <p><strong>Signature:</strong> ________________</p>
+            </div>
+          </div>
+
+          <!-- Rainbow Lounge Rental -->
+          <div class="rule-section">
+            <h3 onclick="toggleRule(this)">Rainbow Lounge Rental <i class="fas fa-chevron-down"></i></h3>
+            <div class="rule-content">
+              <p><strong>Room:</strong> Rainbow Lounge (up to 60 people)</p>
+              <p><strong>Cost:</strong> $150 (Mon-Thu) or $225 (Fri-Sun/holidays), $500 deposit, $25/hr security (min 4 hrs), $25 garbage (cheques to Rainbow Village)</p>
+              <p><strong>Time:</strong> Ends at midnight, clean by 12:30 AM</p>
+              <h4>Easy Rules:</h4>
+              <ol>
+                <li>Up to 60 guests allowed.</li>
+                <li>Only residents can book—no outsiders, or lose $500 and booking rights.</li>
+                <li>Pay rental, $500 deposit, and security fee when booking. Deposit back in 3 days if no issues.</li>
+                <li>You need a security guard: $25/hr (or $50/hr on holidays), at least 4 hrs, paid from start to cleanup.</li>
+                <li>Pay $25 for garbage; take it to your building’s trash room, or pay extra.</li>
+                <li>You clean up after the event.</li>
+                <li>Book 7 days to 6 months ahead. Cancel 48 hrs before, or lose your fee.</li>
+                <li>Give a guest list (max 60) 4 days before.</li>
+                <li>Guests park at P1 garage—not under daycare or recreation center (fire rules).</li>
+                <li>Security opens P1 door. You greet guests at stairs (no 3rd floor Building B entry, except seniors/disabled with notice). Don’t bother 3rd-floor residents.</li>
+                <li>Only use washrooms—no other areas.</li>
+                <li>No signs; we’ll provide them if needed.</li>
+                <li>Don’t prop open exit doors.</li>
+                <li>No decorations on walls—damage comes out of deposit or bill.</li>
+                <li>No tape, glue, nails, or pins on walls or ceiling.</li>
+                <li>Tell us if you bring extra furniture; remove it by 10 AM next day. Don’t move our stuff or use the dance floor.</li>
+                <li>You pay for any damage we find.</li>
+                <li>Keep guests quiet and legal, or we’ll step in.</li>
+                <li>You handle legal stuff and cover us for issues or injuries.</li>
+                <li>We don’t cover lost items or injuries.</li>
+                <li>Get permits (like alcohol) yourself and show us before.</li>
+                <li>No smoking in the lounge or common areas.</li>
+                <li>No ticket sales; only family events (no bachelor parties).</li>
+                <li>Clean up before time’s up; security stays until you’re done.</li>
+                <li>No bookings on Christmas Eve, Christmas, New Year’s Eve, or New Year’s Day.</li>
+              </ol>
+              <p><strong>If You Stay Late:</strong> Lose deposit, $100 fine until 1:30 AM, $200 after.</p>
+              <h4>Security Rules (Initial):</h4>
+              <ul>
+                <li>(__) Take out all your stuff, or pay for extra cleaning.</li>
+                <li>(__) Follow security’s instructions.</li>
+              </ul>
+              <p><strong>Sign Here:</strong> I, [Your Name], from Suite [Number] in Building [A/B], agree to these rules.</p>
+              <p><strong>Date:</strong> ___ day of _____, 20__ | <strong>Signature:</strong> ________________</p>
+              <p><strong>Deposit Back:</strong> I got my $500 cheque on ___ day of _____, 20__.</p>
+              <p><strong>Signature:</strong> ________________</p>
+            </div>
+          </div>
+
+          <!-- Elevator Booking -->
+          <div class="rule-section">
+            <h3 onclick="toggleRule(this)">Elevator Booking <i class="fas fa-chevron-down"></i></h3>
+            <div class="rule-content">
+              <p><strong>Use:</strong> Moving in/out, deliveries, renovations</p>
+              <p><strong>Fees:</strong></p>
+              <ul>
+                <li>Move In (Partial/Complete): $300 (Draft) + $50 (Cheque) - Max 3 hrs</li>
+                <li>Move Out (Complete): $300 (Draft) + $50 (Draft) - Max 3 hrs</li>
+                <li>Move Out (Partial): $300 (Draft) + $50 (Cheque) - Max 3 hrs</li>
+                <li>Deliveries: $300 (Cheque) - Max 4 hrs</li>
+                <li>Renovation: $300 (Cheque) - Max 2 hrs (Mon-Fri)</li>
+              </ul>
+              <p><strong>Note:</strong> No bookings on Sundays (except last Sunday of the month) or statutory holidays.</p>
+            </div>
+          </div>
+
+          <!-- Recreation ID Card -->
+          <div class="rule-section">
+            <h3 onclick="toggleRule(this)">Recreation ID Card <i class="fas fa-chevron-down"></i></h3>
+            <div class="rule-content">
+              <p><strong>Cost:</strong> Free for owners, $10 for tenants (2 photos, cheque or cash to Rainbow Village)</p>
+              <h4>Easy Rules:</h4>
+              <ol>
+                <li>Use the rec centre at your own risk.</li>
+                <li>Only use equipment inside; you pay if it breaks or someone gets hurt.</li>
+                <li>Pay for any damage or loss you or your guests cause.</li>
+                <li>Parents cover kids under 16—the same rules apply.</li>
+                <li>Break rules, and you lose rec centre access.</li>
+                <li>Bring your ID card every time, or you’ll be asked to leave.</li>
+              </ol>
+              <h4>Exercise Room Rules:</h4>
+              <ul>
+                <li>Recreation ID card must be visible at all times.</li>
+                <li>All users must sign in at the recreation desk.</li>
+                <li>For residents and adult guests only (max 2 guests per resident).</li>
+                <li>No children under 16 allowed.</li>
+                <li>Proper athletic attire required.</li>
+                <li>Permission required from others present to turn on TV or play music.</li>
+                <li>No smoking, food, or beverages (except water bottles).</li>
+                <li>Equipment must not be removed or borrowed.</li>
+                <li>Room must be left clean; wipe equipment with provided towel and solution.</li>
+                <li>30-minute limit if others are waiting.</li>
+                <li>Report malfunctioning/broken equipment to staff.</li>
+                <li>Contact gatehouse security via intercom for assistance.</li>
+                <li>Proper athletic footwear is required at all times in the gym.</li>
+              </ul>
+              <p><strong>For Kids:</strong> I, [Your Name], let my kids/dependents [Names & Ages] use the pool only.</p>
+              <p><strong>Date:</strong> ___ day of _____, 20__ | <strong>Signature:</strong> ________________</p>
+              <p><strong>Your Info:</strong> Name: ___ | Suite: ___ | Building: ___ | Phone (Home): ___ | (Work): ___ | Age: [ ] 13-24 [ ] 24-59 [ ] 60+ | Emergency Contact: ___ | Phone: ___ | Relation: ___</p>
+              <p><strong>Sign Here:</strong> I, [Your Name], agree to these rules.</p>
+              <p><strong>Date:</strong> ___ day of _____, 20__ | <strong>Signature:</strong> ________________</p>
+            </div>
+          </div>
+
+          <!-- Parking Rules -->
+          <div class="rule-section">
+            <h3 onclick="toggleRule(this)">Parking Rules <i class="fas fa-chevron-down"></i></h3>
+            <div class="rule-content">
+              <ul>
+                <li><strong>Visitor Parking:</strong> Visitors must park at the P1 visitor garage level. Do not park under the daycare or recreation center.</li>
+                <li><strong>Prohibited Parking:</strong> Ground floor parking near the recreation center is prohibited per fire code.</li>
+                <li><strong>Daycare Parking:</strong> Reserved for management, daycare staff, contractors, and delivery drivers. Unauthorized parking will result in tagging and enforcement.</li>
+                <li><strong>Capacity:</strong> Parking is first-come, first-served. Arrange alternative parking if the visitor garage is full.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Pet Management -->
+          <div class="rule-section">
+            <h3 onclick="toggleRule(this)">Pet Management <i class="fas fa-chevron-down"></i></h3>
+            <div class="rule-content">
+              <ul>
+                <li><strong>No Common Area Mess:</strong> Pets must not urinate or defecate in common areas (hallways, stairways).</li>
+                <li><strong>Clean-Up:</strong> Residents must clean up after pets immediately. Failure to do so will result in a $250 charge.</li>
+                <li><strong>Reporting:</strong> Report any violations to gatehouse security or management.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Utility Conservation and Oil Disposal -->
+          <div class="rule-section">
+            <h3 onclick="toggleRule(this)">Utility Conservation and Oil Disposal <i class="fas fa-chevron-down"></i></h3>
+            <div class="rule-content">
+              <ul>
+                <li><strong>Energy Conservation:</strong> Use high-efficiency bulbs in your unit. Turn off all lights when leaving.</li>
+                <li><strong>Water Conservation:</strong> Report any leaky faucets or water-related issues immediately to prevent waste and damage.</li>
+                <li><strong>Oil Disposal:</strong> Dispose of cooking oil/grease in the oil collection drum outside the recycling room. Do not dispose of oil/grease in the kitchen sink.</li>
+                <li><strong>Financial Impact:</strong> Higher utility consumption increases bills, directly affecting monthly maintenance fees.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Community Guidelines -->
+          <div class="rule-section">
+            <h3 onclick="toggleRule(this)">Community Guidelines <i class="fas fa-chevron-down"></i></h3>
+            <div class="rule-content">
+              <h4>Easy Rules:</h4>
+              <ul>
+                <li>Do not leave packages at the gatehouse without management’s approval.</li>
+                <li>No sitting, food, drink, bicycles, or roller blades in the Rainbow Bridge area.</li>
+                <li>No noise or nuisance that disturbs the comfort or quiet enjoyment of others.</li>
+                <li>Recreation Centre hours: 9:00 AM to 11:00 PM.</li>
+                <li>Guests must be signed in by residents at gatehouse security. Residents are responsible for their guests' behavior.</li>
+                <li>Obey all posted signs and instructions from security or management.</li>
+              </ul>
+              <p><strong>ID Card Costs:</strong> Free for owners | $10 for tenants (2 photos, cheque or cash in envelope to Rainbow Village)</p>
+            </div>
+          </div>
+        </div>
+        <div class="permit-actions">
+          <button class="btn-primary" onclick="openModal('contacts')">Contact Us</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal -->
+  <div id="modal" class="modal hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modalTitle"></h2>
+        <button onclick="closeModal()"><i class="fas fa-times"></i></button>
+      </div>
+      <div id="modalBody" class="modal-body"></div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast hidden"></div>
+
+  <script>
+    function showSection(sectionId) {
+      document.querySelectorAll('.section').forEach(s => s.classList.add('hidden'));
+      document.getElementById(sectionId).classList.remove('hidden');
+      document.querySelector('.nav-menu').classList.remove('active');
+    }
+
+    function toggleNav() {
+      document.querySelector('.nav-menu').classList.toggle('active');
+    }
+
+    function toggleRule(header) {
+      const content = header.nextElementSibling;
+      content.classList.toggle('hidden');
+      const icon = header.querySelector('i');
+      icon.classList.toggle('fa-chevron-down');
+      icon.classList.toggle('fa-chevron-up');
+    }
+
+    function openModal(type) {
+      const modal = document.getElementById('modal');
+      const title = document.getElementById('modalTitle');
+      const body = document.getElementById('modalBody');
+      modal.classList.remove('hidden');
+      if (type === 'about') {
+        title.textContent = 'About Rainbow Village';
+        body.innerHTML = `
+          <p>Rainbow Village is a vibrant community committed to fostering a safe, enjoyable, and respectful environment for all residents.</p>
+          <p>These rules ensure harmony and fairness across our shared spaces.</p>
+        `;
+      } else if (type === 'contacts') {
+        title.textContent = 'All Contacts';
+        body.innerHTML = `
+          <ul>
+            <li><strong>Aidin Gelal (Super, 2466):</strong> 416-912-0500</li>
+            <li><strong>Sameer (Super, 2460):</strong> 647-703-1822</li>
+            <li><strong>Pristine Property (snow/landscaping):</strong> 416-737-8978</li>
+            <li><strong>Garrison Plumbing:</strong> 416-817-6902</li>
+            <li><strong>March Elevators (2466):</strong> 416-533-1135</li>
+            <li><strong>Thyssenkrup Elevators (2460):</strong> 416-291-2000</li>
+            <li><strong>Gemeni Entry (gates):</strong> 647-778-0965</li>
+            <li><strong>Graham Alarm (2460: 50057169, 2466: 50057168, Passcode 1902):</strong> 905-897-8822</li>
+            <li><strong>SMS Emergency:</strong> 416-360-1902</li>
+            <li><strong>Toronto Public Health:</strong> 416-392-1250</li>
+          </ul>
+          <p>For emergencies or urgent issues, contact the appropriate number above.</p>
+        `;
+      }
+    }
+
+    function closeModal() {
+      document.getElementById('modal').classList.add('hidden');
+    }
+
+    function showToast(message, type = 'success') {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.className = `toast ${type}`;
+      toast.classList.remove('hidden');
+      setTimeout(() => toast.classList.add('hidden'), 3000);
+    }
+
+    // Initialize: Collapse all rule sections except the first one
+    document.addEventListener('DOMContentLoaded', () => {
+      const ruleSections = document.querySelectorAll('.rule-section');
+      ruleSections.forEach((section, index) => {
+        if (index !== 0) {
+          section.querySelector('.rule-content').classList.add('hidden');
+          section.querySelector('i').classList.remove('fa-chevron-up');
+          section.querySelector('i').classList.add('fa-chevron-down');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

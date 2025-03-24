@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rainbow Parking System</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  <!-- Loading Spinner -->
+  <div id="loadingSpinner" class="spinner hidden">
+    <i class="fas fa-spinner fa-spin"></i>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-content">
+      <div class="logo">
+        <h1><i class="fas fa-parking"></i> Rainbow Village Parking</h1>
+      </div>
+      <div class="system-label">Security Management System</div>
+    </div>
+  </header>
+
+  <!-- Main Layout with Sidebar -->
+  <div class="layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <nav class="sidebar-menu">
+        <button class="active" onclick="showSection('dashboard')"><i class="fas fa-tachometer-alt"></i> Dashboard</button>
+        <button onclick="showSection('permits')"><i class="fas fa-ticket-alt"></i> Permit Management</button>
+        <button onclick="showSection('unit-search')"><i class="fas fa-search"></i> Unit Search</button>
+        <button onclick="showSection('report')"><i class="fas fa-exclamation-circle"></i> Report Issue</button>
+        <button onclick="showSection('about')"><i class="fas fa-info-circle"></i> About</button>
+<button onclick="window.location.href='index2.html'"><i class="fas fa-book"></i> Site Rules</button>
+
+      </nav>
+      <div class="copyright">© 2025 Jagroop Singh<br>All rights reserved</div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Dashboard Section -->
+      <section id="dashboard" class="section active">
+        <div class="container">
+          <div class="section-header">
+            <h2>Dashboard</h2>
+            <button class="btn-secondary" onclick="refreshMetrics()"><i class="fas fa-sync-alt"></i> Refresh</button>
+          </div>
+          <div class="metrics-grid">
+            <div class="metric-card" title="Total number of permits issued">
+              <i class="fas fa-ticket-alt"></i>
+              <h3>Total Permits</h3>
+              <p id="totalPermits" class="count-up">0</p>
+            </div>
+            <div class="metric-card" title="Permits issued today">
+              <i class="fas fa-ticket-alt"></i>
+              <h3>Today's Permits</h3>
+              <p id="todayPermits" class="count-up">0</p>
+            </div>
+            <div class="metric-card" title="Unresolved issues">
+              <i class="fas fa-exclamation-circle"></i>
+              <h3>Open Issues</h3>
+              <p id="openIssues" class="count-up">0</p>
+            </div>
+          </div>
+          <!-- Updates Section -->
+          <div class="updates-section">
+            <h3>Latest Updates</h3>
+            <div id="updatesList" class="updates-list"></div>
+            <div id="addUpdateForm" class="hidden">
+              <h4>Add New Update (Admin Only)</h4>
+              <form id="updateForm" onsubmit="addUpdate(event)">
+                <div class="search-group">
+                  <label>Update Message</label>
+                  <textarea id="updateMessage" placeholder="Enter update message..." maxlength="500" required></textarea>
+                </div>
+                <button class="btn-primary" type="submit"><i class="fas fa-plus"></i> Add Update</button>
+              </form>
+            </div>
+          </div>
+          <div class="nav-grid">
+            <div class="nav-card" onclick="showSection('permits')">
+              <i class="fas fa-ticket-alt"></i>
+              <h3>Permit Management</h3>
+              <p>Add new visitor parking permits</p>
+            </div>
+            <div class="nav-card" onclick="showSection('unit-search')">
+              <i class="fas fa-search"></i>
+              <h3>Unit Search</h3>
+              <p>Search permits and check remaining permits</p>
+            </div>
+            <div class="nav-card" onclick="showSection('report')">
+              <i class="fas fa-exclamation-circle"></i>
+              <h3>Report Issue</h3>
+              <p>Report problems with the parking system</p>
+            </div>
+            <div class="nav-card" onclick="showSection('about')">
+              <i class="fas fa-info-circle"></i>
+              <h3>About</h3>
+              <p>Information about the parking management system</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Permit Management Section -->
+      <section id="permits" class="section hidden">
+        <div class="container">
+          <h2>Permit Management</h2>
+          <p>Add new visitor parking permits with ease</p>
+          <div class="permit-actions">
+            <button class="btn-primary" onclick="showSection('form')"><i class="fas fa-plus"></i> Add New Permit</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Permit Form Section -->
+      <section id="form" class="section hidden">
+        <div class="container">
+          <div class="form-container">
+            <div class="form-header">
+              <h3 id="formTitle">Add New Parking Permit</h3>
+              <button onclick="showSection('permits')"><i class="fas fa-times"></i></button>
+            </div>
+            <div id="formError" class="error hidden"></div>
+            <div id="formRemaining" class="info hidden"></div>
+            <form id="permitForm" onsubmit="submitPermit(event)">
+              <input type="hidden" id="editPermitId">
+              <div class="grid form-grid">
+                <div>
+                  <label>Permit No. <span class="tooltip" title="Auto-generated">ℹ</span></label>
+                  <input type="text" id="permitNo" readonly>
+                </div>
+                <div>
+                  <label>Unit No.</label>
+                  <input type="text" id="unitNo" placeholder="1234/A" pattern="^\d{4}/[A-Z]$" required oninput="checkUnit()">
+                </div>
+                <div>
+                  <label>Visitor Name</label>
+                  <input type="text" id="visitorName" required>
+                </div>
+                <div>
+                  <label>License Plate</label>
+                  <input type="text" id="licensePlate" required>
+                </div>
+                <div>
+                  <label>Vehicle Make</label>
+                  <select id="vehicleMake" required>
+                    <option value="">Select Make</option>
+                    <option value="Toyota">Toyota</option>
+                    <option value="Honda">Honda</option>
+                    <option value="Ford">Ford</option>
+                    <option value="BMW">BMW</option>
+                    <option value="Mercedes">Mercedes</option>
+                    <option value="Tesla">Tesla</option>
+                    <option value="Volkswagen">Volkswagen</option>
+                    <option value="Hyundai">Hyundai</option>
+                  </select>
+                </div>
+                <div>
+                  <label>Vehicle Color</label>
+                  <select id="vehicleColor" required>
+                    <option value="">Select Color</option>
+                    <option value="Black">Black</option>
+                    <option value="White">White</option>
+                    <option value="Silver">Silver</option>
+                    <option value="Blue">Blue</option>
+                    <option value="Red">Red</option>
+                    <option value="Green">Green</option>
+                    <option value="Yellow">Yellow</option>
+                    <option value="Gray">Gray</option>
+                  </select>
+                </div>
+                <div>
+                  <label>Issue Officer</label>
+                  <select id="issueOfficer" required>
+                    <option value="">Select Officer</option>
+                    <option value="Jagroop">Jagroop</option>
+                    <option value="Melbin">Melbin</option>
+                    <option value="Kartik">Kartik</option>
+                    <option value="Abiy">Abiy</option>
+                    <option value="Zamil">Zamil</option>
+                    <option value="Abir">Abir</option>
+                    <option value="Bhupinder">Bhupinder</option>
+                  </select>
+                </div>
+                <div>
+                  <label>Issue Date</label>
+                  <input type="date" id="issueDate" required>
+                </div>
+                <div>
+                  <label>Expire Date</label>
+                  <input type="date" id="expireDate" required>
+                </div>
+              </div>
+              <div class="form-actions">
+                <button type="button" onclick="resetForm()">Reset</button>
+                <button type="button" onclick="showSection('permits')">Cancel</button>
+                <button type="submit" id="savePermitBtn">Save Permit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- Unit Search Section -->
+      <section id="unit-search" class="section hidden">
+        <div class="container">
+          <h2>Unit Search</h2>
+          <p>Search for permits or check remaining permits for specific units</p>
+          <div class="grid">
+            <div class="search-group">
+              <label>Search Permits</label>
+              <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchPermits" placeholder="Search by any field..." oninput="searchPermits()">
+              </div>
+            </div>
+            <div class="search-group">
+              <label>Check Remaining Permits</label>
+              <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" id="unitSearchInput" placeholder="Unit No. (e.g., 1234/A)" oninput="checkRemainingPermits()">
+              </div>
+              <div id="unitSearchResult" class="info hidden"></div>
+            </div>
+          </div>
+          <div class="search-actions">
+            <button class="btn-secondary" onclick="clearSearch()"><i class="fas fa-times"></i> Clear Search</button>
+          </div>
+          <div id="searchResults" class="table-container hidden">
+            <table id="permitsTable">
+              <thead>
+                <tr>
+                  <th>Permit Details</th>
+                  <th>Vehicle Info</th>
+                  <th>Dates</th>
+                  <th>Officer</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="permitsTableBody"></tbody>
+            </table>
+            <div class="pagination">
+              <button onclick="prevPage()" id="prevPageBtn" disabled><i class="fas fa-chevron-left"></i> Previous</button>
+              <span id="pageInfo">Page 1</span>
+              <button onclick="nextPage()" id="nextPageBtn">Next <i class="fas fa-chevron-right"></i></button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Report Issue Section -->
+      <section id="report" class="section hidden">
+        <div class="container">
+          <h2>Report an Issue</h2>
+          <div id="reportForm">
+            <p>Encountered a problem? Submit your issue below:</p>
+            <form id="issueForm" onsubmit="submitIssue(event)">
+              <div class="search-group">
+                <label>Your Name</label>
+                <input type="text" id="reportUsername" placeholder="Enter your name" required>
+              </div>
+              <div class="search-group">
+                <label>Issue Description <span id="charCount">0/500</span></label>
+                <textarea id="issueDescription" placeholder="Describe the issue..." maxlength="500" required oninput="updateCharCount()"></textarea>
+              </div>
+              <button class="btn-primary" type="submit"><i class="fas fa-paper-plane"></i> Submit Issue</button>
+            </form>
+          </div>
+          <div id="adminAuth" class="hidden">
+            <p>Enter admin password to view and manage issues:</p>
+            <div class="search-group">
+              <label>Admin Password</label>
+              <input type="password" id="adminPassword" placeholder="Enter admin password">
+            </div>
+            <button class="btn-primary" onclick="loginAsAdmin()"><i class="fas fa-lock"></i> Login as Admin</button>
+          </div>
+          <div id="adminIssues" class="table-container hidden">
+            <div class="section-header">
+              <h3>Reported Issues (Admin View)</h3>
+              <button class="btn-secondary" onclick="clearSolvedIssues()"><i class="fas fa-trash"></i> Clear Solved Issues</button>
+            </div>
+            <table id="issuesTable">
+              <thead>
+                <tr>
+                  <th>Issue ID</th>
+                  <th>Reported By</th>
+                  <th>Description</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="issuesTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- About Section -->
+      <section id="about" class="section hidden">
+        <div class="container">
+          <h2>About Rainbow Parking</h2>
+          <p>Welcome to the Rainbow Parking System, a smart solution designed by Jagroop Singh for Rainbow Village. This system streamlines visitor parking management with features like automated permit issuance, unit-based permit tracking, and issue reporting for efficient community parking.</p>
+          <h3>Security Team</h3>
+          <ul class="security-list">
+            <li>Jagroop Singh</li>
+            <li>Melbin Thomas</li>
+            <li>Kartik Sharma</li>
+            <li>Abiy Tesfaye</li>
+            <li>Zamil Khan</li>
+            <li>Abir Hassan</li>
+            <li>Bhupinder Singh</li>
+          </ul>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast hidden">
+    <i id="toastIcon" class="fas"></i>
+    <span id="toastMessage"></span>
+  </div>
+
+  <script>
+    // IndexedDB setup for permits, issues, and updates
+    let db;
+    let permits = [];
+    let issues = [];
+    let updates = [];
+    let currentUser = null;
+    let isAdmin = false;
+    const ADMIN_PASSWORD = "3343";
+    const ITEMS_PER_PAGE = 5;
+    let currentPage = 1;
+    let filteredPermits = [];
+
+    const request = indexedDB.open('ParkingDB', 3); // Updated version to 3 for new object store
+
+    request.onupgradeneeded = function(event) {
+      db = event.target.result;
+      if (!db.objectStoreNames.contains('permits')) {
+        const permitStore = db.createObjectStore('permits', { keyPath: 'id', autoIncrement: true });
+        permitStore.createIndex('permitNo', 'permitNo', { unique: true });
+        permitStore.createIndex('licensePlate', 'licensePlate', { unique: false });
+      }
+      if (!db.objectStoreNames.contains('issues')) {
+        const issueStore = db.createObjectStore('issues', { keyPath: 'id', autoIncrement: true });
+        issueStore.createIndex('reportedBy', 'reportedBy', { unique: false });
+      }
+      if (!db.objectStoreNames.contains('updates')) {
+        const updateStore = db.createObjectStore('updates', { keyPath: 'id', autoIncrement: true });
+        updateStore.createIndex('createdAt', 'createdAt', { unique: false });
+      }
+    };
+
+    request.onsuccess = function(event) {
+      db = event.target.result;
+      loadPermitsFromDB();
+      loadIssuesFromDB();
+      loadUpdatesFromDB();
+    };
+
+    request.onerror = function(event) {
+      console.error('IndexedDB error:', event.target.errorCode);
+      showToast('Database error. Please try again later.', 'error');
+    };
+
+    function showLoadingSpinner() {
+      document.getElementById('loadingSpinner').classList.remove('hidden');
+    }
+
+    function hideLoadingSpinner() {
+      document.getElementById('loadingSpinner').classList.add('hidden');
+    }
+
+    function loadPermitsFromDB() {
+      showLoadingSpinner();
+      const transaction = db.transaction(['permits'], 'readonly');
+      const store = transaction.objectStore('permits');
+      const request = store.getAll();
+
+      request.onsuccess = function() {
+        permits = request.result.length ? request.result : [
+          { id: 1, permitNo: "P001", unitNo: "1234/A", visitorName: "John Doe", licensePlate: "ABC123", vehicleMake: "Toyota", vehicleColor: "Blue", issueDate: "2025-03-01", expireDate: "2025-03-31", issueOfficer: "Jagroop" },
+          { id: 2, permitNo: "P002", unitNo: "5678/B", visitorName: "Jane Smith", licensePlate: "XYZ789", vehicleMake: "Honda", vehicleColor: "Red", issueDate: "2025-03-02", expireDate: "2025-03-15", issueOfficer: "Melbin" }
+        ];
+        if (!request.result.length) {
+          const writeTransaction = db.transaction(['permits'], 'readwrite');
+          const writeStore = writeTransaction.objectStore('permits');
+          permits.forEach(permit => writeStore.add(permit));
+        }
+        updateDashboardMetrics();
+        hideLoadingSpinner();
+      };
+
+      request.onerror = function() {
+        showToast('Error loading permits from database.', 'error');
+        hideLoadingSpinner();
+      };
+    }
+
+    function loadIssuesFromDB() {
+      showLoadingSpinner();
+      const transaction = db.transaction(['issues'], 'readonly');
+      const store = transaction.objectStore('issues');
+      const request = store.getAll();
+
+      request.onsuccess = function() {
+        issues = request.result;
+        updateDashboardMetrics();
+        if (isAdmin) loadIssuesTable();
+        hideLoadingSpinner();
+      };
+
+      request.onerror = function() {
+        showToast('Error loading issues from database.', 'error');
+        hideLoadingSpinner();
+      };
+    }
+
+    function loadUpdatesFromDB() {
+      showLoadingSpinner();
+      const transaction = db.transaction(['updates'], 'readonly');
+      const store = transaction.objectStore('updates');
+      const request = store.getAll();
+
+      request.onsuccess = function() {
+        updates = request.result;
+        displayUpdates();
+        hideLoadingSpinner();
+      };
+
+      request.onerror = function() {
+        showToast('Error loading updates from database.', 'error');
+        hideLoadingSpinner();
+      };
+    }
+
+    function updateDashboardMetrics() {
+      const today = new Date().toISOString().split('T')[0];
+      const totalPermits = permits.length;
+      const todayPermits = permits.filter(p => p.issueDate === today).length;
+      const openIssues = issues.filter(i => i.status !== 'solved').length;
+
+      animateCount('totalPermits', totalPermits);
+      animateCount('todayPermits', todayPermits);
+      animateCount('openIssues', openIssues);
+
+      // Show/hide update form based on admin status
+      document.getElementById('addUpdateForm').classList.toggle('hidden', !isAdmin);
+    }
+
+    function animateCount(elementId, target) {
+      const element = document.getElementById(elementId);
+      let start = 0;
+      const duration = 1000;
+      const increment = target / (duration / 60);
+      const interval = setInterval(() => {
+        start += increment;
+        if (start >= target) {
+          start = target;
+          clearInterval(interval);
+        }
+        element.textContent = Math.round(start);
+      }, 60);
+    }
+
+    function refreshMetrics() {
+      showLoadingSpinner();
+      updateDashboardMetrics();
+      showToast('Metrics refreshed successfully!');
+      hideLoadingSpinner();
+    }
+
+    function updatePermitNo() {
+      const permitNo = `P${getNextPermitNo()}`;
+      document.getElementById('permitNo').value = permitNo;
+      const today = new Date().toISOString().split('T')[0];
+      const expire = new Date();
+      expire.setDate(expire.getDate() + 30);
+      document.getElementById('issueDate').value = today;
+      document.getElementById('expireDate').value = expire.toISOString().split('T')[0];
+    }
+
+    function showSection(sectionId) {
+      document.querySelectorAll('.section').forEach(s => s.classList.add('hidden'));
+      document.getElementById(sectionId).classList.remove('hidden');
+      if (sectionId === 'form') {
+        if (!document.getElementById('editPermitId').value) {
+          updatePermitNo();
+          document.getElementById('formTitle').textContent = 'Add New Parking Permit';
+        }
+      }
+      if (sectionId === 'unit-search') {
+        currentPage = 1;
+        searchPermits();
+      }
+      if (sectionId === 'report') setupReportSection();
+      if (sectionId === 'dashboard') displayUpdates();
+      document.querySelectorAll('.sidebar-menu button').forEach(btn => btn.classList.remove('active'));
+      document.querySelector(`.sidebar-menu button[onclick="showSection('${sectionId}')"]`)?.classList.add('active');
+    }
+
+    function getNextPermitNo() {
+      if (!permits.length) return "001";
+      const lastPermit = permits[permits.length - 1].permitNo;
+      const num = parseInt(lastPermit.slice(1)) + 1;
+      return String(num).padStart(3, '0');
+    }
+
+    function searchPermits() {
+      const query = document.getElementById('searchPermits').value.toLowerCase();
+      filteredPermits = permits.filter(p => 
+        p.permitNo.toLowerCase().includes(query) ||
+        p.unitNo.toLowerCase().includes(query) ||
+        p.visitorName.toLowerCase().includes(query) ||
+        p.licensePlate.toLowerCase().includes(query) ||
+        p.vehicleMake.toLowerCase().includes(query) ||
+        p.vehicleColor.toLowerCase().includes(query) ||
+        p.issueOfficer.toLowerCase().includes(query)
+      );
+      currentPage = 1;
+      loadSearchResults();
+    }
+
+    function loadSearchResults() {
+      const start = (currentPage - 1) * ITEMS_PER_PAGE;
+      const end = start + ITEMS_PER_PAGE;
+      const paginatedPermits = filteredPermits.slice(start, end);
+
+      const tableBody = document.getElementById('permitsTableBody');
+      tableBody.innerHTML = paginatedPermits.map(p => `
+        <tr>
+          <td>${highlightText(p.permitNo, document.getElementById('searchPermits').value)}<br><span>${highlightText(p.visitorName, document.getElementById('searchPermits').value)} (${highlightText(p.unitNo, document.getElementById('searchPermits').value)})</span></td>
+          <td>${highlightText(p.licensePlate, document.getElementById('searchPermits').value)}<br><span>${highlightText(p.vehicleMake, document.getElementById('searchPermits').value)} - ${highlightText(p.vehicleColor, document.getElementById('searchPermits').value)}</span></td>
+          <td><i class="fas fa-calendar"></i> ${new Date(p.issueDate).toLocaleDateString()} - ${new Date(p.expireDate).toLocaleDateString()}</td>
+          <td>${highlightText(p.issueOfficer, document.getElementById('searchPermits').value)}</td>
+          <td><span class="status ${new Date(p.expireDate) > new Date() ? 'active' : 'expired'}">${new Date(p.expireDate) > new Date() ? 'Active' : 'Expired'}</span></td>
+          <td><button class="btn-primary" onclick="editPermit(${p.id})"><i class="fas fa-edit"></i> Edit</button></td>
+        </tr>
+      `).join('');
+
+      const tableContainer = document.getElementById('searchResults');
+      tableContainer.classList.toggle('hidden', filteredPermits.length === 0);
+
+      const totalPages = Math.ceil(filteredPermits.length / ITEMS_PER_PAGE);
+      document.getElementById('pageInfo').textContent = `Page ${currentPage} of ${totalPages}`;
+      document.getElementById('prevPageBtn').disabled = currentPage === 1;
+      document.getElementById('nextPageBtn').disabled = currentPage === totalPages || totalPages === 0;
+    }
+
+    function highlightText(text, query) {
+      if (!query) return text;
+      const regex = new RegExp(`(${query})`, 'gi');
+      return text.replace(regex, '<span class="highlight">$1</span>');
+    }
+
+    function prevPage() {
+      if (currentPage > 1) {
+        currentPage--;
+        loadSearchResults();
+      }
+    }
+
+    function nextPage() {
+      const totalPages = Math.ceil(filteredPermits.length / ITEMS_PER_PAGE);
+      if (currentPage < totalPages) {
+        currentPage++;
+        loadSearchResults();
+      }
+    }
+
+    function clearSearch() {
+      document.getElementById('searchPermits').value = '';
+      document.getElementById('unitSearchInput').value = '';
+      document.getElementById('unitSearchResult').classList.add('hidden');
+      filteredPermits = permits;
+      currentPage = 1;
+      loadSearchResults();
+    }
+
+    function checkRemainingPermits() {
+      const unitNo = document.getElementById('unitSearchInput').value.toUpperCase();
+      const regex = /^\d{4}\/[A-Z]$/;
+      const remainingDiv = document.getElementById('unitSearchResult');
+      if (regex.test(unitNo)) {
+        const remaining = 7 - permits.filter(p => p.unitNo.toUpperCase() === unitNo).length;
+        remainingDiv.textContent = `${remaining} permit${remaining !== 1 ? 's' : ''} remaining`;
+        remainingDiv.classList.remove('hidden');
+      } else {
+        remainingDiv.classList.add('hidden');
+      }
+    }
+
+    function checkUnit() {
+      const unitNo = document.getElementById('unitNo').value.toUpperCase();
+      const regex = /^\d{4}\/[A-Z]$/;
+      const remainingDiv = document.getElementById('formRemaining');
+      const errorDiv = document.getElementById('formError');
+      const submitBtn = document.getElementById('savePermitBtn');
+      const unitInput = document.getElementById('unitNo');
+
+      if (regex.test(unitNo)) {
+        const remaining = 7 - permits.filter(p => p.unitNo.toUpperCase() === unitNo).length;
+        remainingDiv.textContent = `This unit has ${remaining} permit${remaining !== 1 ? 's' : ''} remaining`;
+        remainingDiv.classList.remove('hidden');
+        submitBtn.disabled = remaining <= 0;
+        unitInput.classList.remove('invalid');
+        if (remaining <= 0) {
+          errorDiv.textContent = 'Monthly permit limit reached';
+          errorDiv.classList.remove('hidden');
+        } else {
+          errorDiv.classList.add('hidden');
+        }
+      } else {
+        remainingDiv.classList.add('hidden');
+        submitBtn.disabled = false;
+        errorDiv.classList.add('hidden');
+        unitInput.classList.add('invalid');
+      }
+    }
+
+    function resetForm() {
+      document.getElementById('permitForm').reset();
+      document.getElementById('editPermitId').value = '';
+      document.getElementById('formTitle').textContent = 'Add New Parking Permit';
+      updatePermitNo();
+      document.getElementById('formError').classList.add('hidden');
+      document.getElementById('formRemaining').classList.add('hidden');
+      document.getElementById('savePermitBtn').disabled = false;
+      document.querySelectorAll('.form-grid input, .form-grid select').forEach(input => input.classList.remove('invalid'));
+    }
+
+    function editPermit(permitId) {
+      const permit = permits.find(p => p.id === permitId);
+      if (!permit) {
+        showToast('Permit not found.', 'error');
+        return;
+      }
+
+      document.getElementById('formTitle').textContent = 'Edit Parking Permit';
+      document.getElementById('editPermitId').value = permit.id;
+      document.getElementById('permitNo').value = permit.permitNo;
+      document.getElementById('unitNo').value = permit.unitNo;
+      document.getElementById('visitorName').value = permit.visitorName;
+      document.getElementById('licensePlate').value = permit.licensePlate;
+      document.getElementById('vehicleMake').value = permit.vehicleMake;
+      document.getElementById('vehicleColor').value = permit.vehicleColor;
+      document.getElementById('issueOfficer').value = permit.issueOfficer;
+      document.getElementById('issueDate').value = permit.issueDate;
+      document.getElementById('expireDate').value = permit.expireDate;
+
+      checkUnit();
+      showSection('form');
+    }
+
+    function submitPermit(event) {
+      event.preventDefault();
+      const editPermitId = document.getElementById('editPermitId').value;
+      const unitNo = document.getElementById('unitNo').value.toUpperCase();
+      const licensePlate = document.getElementById('licensePlate').value.toUpperCase();
+      const issueDate = new Date(document.getElementById('issueDate').value);
+      const expireDate = new Date(document.getElementById('expireDate').value);
+
+      // Validation checks
+      const form = document.getElementById('permitForm');
+      let isValid = true;
+      form.querySelectorAll('input, select').forEach(input => {
+        if (!input.checkValidity()) {
+          input.classList.add('invalid');
+          isValid = false;
+        } else {
+          input.classList.remove('invalid');
+        }
+      });
+
+      if (!isValid) {
+        showToast('Please fill in all required fields correctly.', 'error');
+        return;
+      }
+
+      if (!editPermitId && 7 - permits.filter(p => p.unitNo.toUpperCase() === unitNo).length <= 0) {
+        showToast('Permit limit reached for this unit.', 'error');
+        return;
+      }
+
+      const existingPermit = permits.find(p => p.licensePlate.toUpperCase() === licensePlate && new Date(p.expireDate) > new Date() && (!editPermitId || p.id != editPermitId));
+      if (existingPermit) {
+        showToast('Active permit exists for this license plate.', 'error');
+        return;
+      }
+
+      if (issueDate >= expireDate) {
+        showToast('Expire date must be after issue date.', 'error');
+        return;
+      }
+
+      if (!confirm(`Are you sure you want to ${editPermitId ? 'update' : 'save'} this permit?`)) return;
+
+      const permitData = {
+        permitNo: document.getElementById('permitNo').value,
+        unitNo: unitNo,
+        visitorName: document.getElementById('visitorName').value,
+        licensePlate: licensePlate,
+        vehicleMake: document.getElementById('vehicleMake').value,
+        vehicleColor: document.getElementById('vehicleColor').value,
+        issueDate: document.getElementById('issueDate').value,
+        expireDate: document.getElementById('expireDate').value,
+        issueOfficer: document.getElementById('issueOfficer').value
+      };
+
+      showLoadingSpinner();
+      const transaction = db.transaction(['permits'], 'readwrite');
+      const store = transaction.objectStore('permits');
+
+      if (editPermitId) {
+        permitData.id = parseInt(editPermitId);
+        const request = store.put(permitData);
+
+        request.onsuccess = function() {
+          const index = permits.findIndex(p => p.id == editPermitId);
+          permits[index] = permitData;
+          showSection('unit-search');
+          updateDashboardMetrics();
+          showToast('Permit updated successfully!');
+          resetForm();
+          hideLoadingSpinner();
+        };
+
+        request.onerror = function() {
+          showToast('Error updating permit. Please try again.', 'error');
+          hideLoadingSpinner();
+        };
+      } else {
+        const request = store.add(permitData);
+
+        request.onsuccess = function() {
+          permitData.id = request.result;
+          permits.push(permitData);
+          showSection('permits');
+          updateDashboardMetrics();
+          showToast('Permit saved successfully!');
+          resetForm();
+          hideLoadingSpinner();
+        };
+
+        request.onerror = function() {
+          showToast('Error saving permit. Please try again.', 'error');
+          hideLoadingSpinner();
+        };
+      }
+    }
+
+    function setupReportSection() {
+      document.getElementById('reportForm').classList.remove('hidden');
+      if (isAdmin) {
+        document.getElementById('adminAuth').classList.add('hidden');
+        document.getElementById('adminIssues').classList.remove('hidden');
+        loadIssuesTable();
+      } else {
+        document.getElementById('adminAuth').classList.remove('hidden');
+        document.getElementById('adminIssues').classList.add('hidden');
+      }
+      updateCharCount();
+    }
+
+    function updateCharCount() {
+      const textarea = document.getElementById('issueDescription');
+      const charCount = document.getElementById('charCount');
+      charCount.textContent = `${textarea.value.length}/500`;
+    }
+
+    function submitIssue(event) {
+      event.preventDefault();
+      const username = document.getElementById('reportUsername').value.trim();
+      const description = document.getElementById('issueDescription').value.trim();
+
+      if (!username || !description) {
+        showToast('Please provide your name and issue description.', 'error');
+        return;
+      }
+
+      const newIssue = {
+        reportedBy: username,
+        description: description,
+        status: 'open',
+        createdAt: new Date().toISOString()
+      };
+
+      showLoadingSpinner();
+      const transaction = db.transaction(['issues'], 'readwrite');
+      const store = transaction.objectStore('issues');
+      const request = store.add(newIssue);
+
+      request.onsuccess = function() {
+        newIssue.id = request.result;
+        issues.push(newIssue);
+        document.getElementById('reportUsername').value = '';
+        document.getElementById('issueDescription').value = '';
+        updateCharCount();
+        updateDashboardMetrics();
+        if (isAdmin) loadIssuesTable();
+        showToast('Issue reported successfully!');
+        hideLoadingSpinner();
+      };
+
+      request.onerror = function() {
+        showToast('Error reporting issue. Please try again.', 'error');
+        hideLoadingSpinner();
+      };
+    }
+
+    function loginAsAdmin() {
+      const password = document.getElementById('adminPassword').value;
+      if (password === ADMIN_PASSWORD) {
+        isAdmin = true;
+        document.getElementById('adminAuth').classList.add('hidden');
+        document.getElementById('adminIssues').classList.remove('hidden');
+        document.getElementById('addUpdateForm').classList.remove('hidden');
+        loadIssuesTable();
+        showToast('Admin login successful.');
+      } else {
+        showToast('Incorrect admin password.', 'error');
+      }
+    }
+
+    function loadIssuesTable() {
+      const tableBody = document.getElementById('issuesTableBody');
+      tableBody.innerHTML = issues.map(i => `
+        <tr>
+          <td>${i.id}</td>
+          <td>${i.reportedBy}</td>
+          <td>${i.description}</td>
+          <td><span class="status ${i.status === 'solved' ? 'active' : 'expired'}">${i.status === 'solved' ? 'Solved' : 'Open'}</span></td>
+          <td>
+            ${i.status !== 'solved' ? `<button class="btn-primary" onclick="markIssueSolved(${i.id})"><i class="fas fa-check"></i> Mark as Solved</button>` : ''}
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function markIssueSolved(issueId) {
+      const issue = issues.find(i => i.id === issueId);
+      if (!issue) return;
+
+      issue.status = 'solved';
+      showLoadingSpinner();
+      const transaction = db.transaction(['issues'], 'readwrite');
+      const store = transaction.objectStore('issues');
+      const request = store.put(issue);
+
+      request.onsuccess = function() {
+        updateDashboardMetrics();
+        loadIssuesTable();
+        showToast('Issue marked as solved.');
+        hideLoadingSpinner();
+      };
+
+      request.onerror = function() {
+        showToast('Error updating issue status.', 'error');
+        hideLoadingSpinner();
+      };
+    }
+
+    function clearSolvedIssues() {
+      if (!confirm('Are you sure you want to clear all solved issues? This action cannot be undone.')) return;
+
+      showLoadingSpinner();
+      const transaction = db.transaction(['issues'], 'readwrite');
+      const store = transaction.objectStore('issues');
+      const unsolvedIssues = issues.filter(i => i.status !== 'solved');
+      const clearRequest = store.clear();
+
+      clearRequest.onsuccess = function() {
+        unsolvedIssues.forEach(issue => {
+          store.add(issue);
+        });
+        issues = unsolvedIssues;
+        updateDashboardMetrics();
+        loadIssuesTable();
+        showToast('Solved issues cleared successfully.');
+        hideLoadingSpinner();
+      };
+
+      clearRequest.onerror = function() {
+        showToast('Error clearing solved issues.', 'error');
+        hideLoadingSpinner();
+      };
+    }
+
+    function addUpdate(event) {
+      event.preventDefault();
+      if (!isAdmin) {
+        showToast('Admin access required to add updates.', 'error');
+        return;
+      }
+
+      const message = document.getElementById('updateMessage').value.trim();
+      if (!message) {
+        showToast('Please enter an update message.', 'error');
+        return;
+      }
+
+      const newUpdate = {
+        message: message,
+        createdAt: new Date().toISOString()
+      };
+
+      showLoadingSpinner();
+      const transaction = db.transaction(['updates'], 'readwrite');
+      const store = transaction.objectStore('updates');
+      const request = store.add(newUpdate);
+
+      request.onsuccess = function() {
+        newUpdate.id = request.result;
+        updates.push(newUpdate);
+        document.getElementById('updateMessage').value = '';
+        displayUpdates();
+        showToast('Update added successfully!');
+        hideLoadingSpinner();
+      };
+
+      request.onerror = function() {
+        showToast('Error adding update. Please try again.', 'error');
+        hideLoadingSpinner();
+      };
+    }
+
+    function displayUpdates() {
+      const updatesList = document.getElementById('updatesList');
+      updates.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)); // Sort by latest first
+      updatesList.innerHTML = updates.length ? updates.map(u => `
+        <div class="update-item">
+          <p>${u.message}</p>
+          <span>${new Date(u.createdAt).toLocaleString()}</span>
+        </div>
+      `).join('') : '<p>No updates available.</p>';
+    }
+
+    function showToast(message, type = 'success') {
+      const toast = document.getElementById('toast');
+      const toastIcon = document.getElementById('toastIcon');
+      const toastMessage = document.getElementById('toastMessage');
+      toastMessage.textContent = message;
+      toast.className = `toast ${type}`;
+      toastIcon.className = `fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}`;
+      toast.classList.remove('hidden');
+      setTimeout(() => toast.classList.add('hidden'), 3000);
+    }
+
+    // Auto-reload every 1 minute (60 seconds)
+    setInterval(() => {
+      location.reload();
+    }, 60000);
+  </script>
+</body>
+</html>
