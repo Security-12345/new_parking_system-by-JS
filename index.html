@@ -10,14 +10,14 @@
 <body>
   <!-- Loading Spinner -->
   <div id="loadingSpinner" class="spinner hidden">
-    <i class="fas fa-spinner fa-spin"></i>
+    <i class="fas fa-spinner fa-spin" aria-hidden="true"></i>
   </div>
 
   <!-- Header -->
   <header class="header">
     <div class="header-content">
       <div class="logo">
-        <h1><i class="fas fa-parking"></i> Rainbow Village Parking</h1>
+        <h1><i class="fas fa-parking" aria-hidden="true"></i> Rainbow Village Parking</h1>
       </div>
       <div class="system-label">Security Management System</div>
     </div>
@@ -28,13 +28,12 @@
     <!-- Sidebar -->
     <aside class="sidebar">
       <nav class="sidebar-menu">
-        <button class="active" onclick="showSection('dashboard')"><i class="fas fa-tachometer-alt"></i> Dashboard</button>
-        <button onclick="showSection('permits')"><i class="fas fa-ticket-alt"></i> Permit Management</button>
-        <button onclick="showSection('unit-search')"><i class="fas fa-search"></i> Unit Search</button>
-        <button onclick="showSection('report')"><i class="fas fa-exclamation-circle"></i> Report Issue</button>
-        <button onclick="showSection('about')"><i class="fas fa-info-circle"></i> About</button>
-<button onclick="window.location.href='index2.html'"><i class="fas fa-book"></i> Site Rules</button>
-
+        <button class="active" onclick="showSection('dashboard')" aria-label="Go to Dashboard"><i class="fas fa-tachometer-alt" aria-hidden="true"></i> Dashboard</button>
+        <button onclick="showSection('permits')" aria-label="Go to Permit Management"><i class="fas fa-ticket-alt" aria-hidden="true"></i> Permit Management</button>
+        <button onclick="showSection('unit-search')" aria-label="Go to Unit Search"><i class="fas fa-search" aria-hidden="true"></i> Unit Search</button>
+        <button onclick="showSection('report')" aria-label="Go to Report Issue"><i class="fas fa-exclamation-circle" aria-hidden="true"></i> Report Issue</button>
+        <button onclick="showSection('about')" aria-label="Go to About"><i class="fas fa-info-circle" aria-hidden="true"></i> About</button>
+        <button onclick="window.location.href='index2.html'" aria-label="Go to Site Rules"><i class="fas fa-book" aria-hidden="true"></i> Site Rules</button>
       </nav>
       <div class="copyright">© 2025 Jagroop Singh<br>All rights reserved</div>
     </aside>
@@ -46,21 +45,21 @@
         <div class="container">
           <div class="section-header">
             <h2>Dashboard</h2>
-            <button class="btn-secondary" onclick="refreshMetrics()"><i class="fas fa-sync-alt"></i> Refresh</button>
+            <button class="btn-secondary" onclick="refreshMetrics()" aria-label="Refresh Metrics"><i class="fas fa-sync-alt" aria-hidden="true"></i> Refresh</button>
           </div>
           <div class="metrics-grid">
             <div class="metric-card" title="Total number of permits issued">
-              <i class="fas fa-ticket-alt"></i>
+              <i class="fas fa-ticket-alt" aria-hidden="true"></i>
               <h3>Total Permits</h3>
               <p id="totalPermits" class="count-up">0</p>
             </div>
             <div class="metric-card" title="Permits issued today">
-              <i class="fas fa-ticket-alt"></i>
+              <i class="fas fa-ticket-alt" aria-hidden="true"></i>
               <h3>Today's Permits</h3>
               <p id="todayPermits" class="count-up">0</p>
             </div>
             <div class="metric-card" title="Unresolved issues">
-              <i class="fas fa-exclamation-circle"></i>
+              <i class="fas fa-exclamation-circle" aria-hidden="true"></i>
               <h3>Open Issues</h3>
               <p id="openIssues" class="count-up">0</p>
             </div>
@@ -73,31 +72,31 @@
               <h4>Add New Update (Admin Only)</h4>
               <form id="updateForm" onsubmit="addUpdate(event)">
                 <div class="search-group">
-                  <label>Update Message</label>
-                  <textarea id="updateMessage" placeholder="Enter update message..." maxlength="500" required></textarea>
+                  <label for="updateMessage">Update Message</label>
+                  <textarea id="updateMessage" placeholder="Enter update message..." maxlength="500" required aria-required="true"></textarea>
                 </div>
-                <button class="btn-primary" type="submit"><i class="fas fa-plus"></i> Add Update</button>
+                <button class="btn-primary" type="submit" aria-label="Add Update"><i class="fas fa-plus" aria-hidden="true"></i> Add Update</button>
               </form>
             </div>
           </div>
           <div class="nav-grid">
-            <div class="nav-card" onclick="showSection('permits')">
-              <i class="fas fa-ticket-alt"></i>
+            <div class="nav-card" onclick="showSection('permits')" role="button" tabindex="0" aria-label="Go to Permit Management">
+              <i class="fas fa-ticket-alt" aria-hidden="true"></i>
               <h3>Permit Management</h3>
               <p>Add new visitor parking permits</p>
             </div>
-            <div class="nav-card" onclick="showSection('unit-search')">
-              <i class="fas fa-search"></i>
+            <div class="nav-card" onclick="showSection('unit-search')" role="button" tabindex="0" aria-label="Go to Unit Search">
+              <i class="fas fa-search" aria-hidden="true"></i>
               <h3>Unit Search</h3>
               <p>Search permits and check remaining permits</p>
             </div>
-            <div class="nav-card" onclick="showSection('report')">
-              <i class="fas fa-exclamation-circle"></i>
+            <div class="nav-card" onclick="showSection('report')" role="button" tabindex="0" aria-label="Go to Report Issue">
+              <i class="fas fa-exclamation-circle" aria-hidden="true"></i>
               <h3>Report Issue</h3>
               <p>Report problems with the parking system</p>
             </div>
-            <div class="nav-card" onclick="showSection('about')">
-              <i class="fas fa-info-circle"></i>
+            <div class="nav-card" onclick="showSection('about')" role="button" tabindex="0" aria-label="Go to About">
+              <i class="fas fa-info-circle" aria-hidden="true"></i>
               <h3>About</h3>
               <p>Information about the parking management system</p>
             </div>
@@ -111,7 +110,7 @@
           <h2>Permit Management</h2>
           <p>Add new visitor parking permits with ease</p>
           <div class="permit-actions">
-            <button class="btn-primary" onclick="showSection('form')"><i class="fas fa-plus"></i> Add New Permit</button>
+            <button class="btn-primary" onclick="showSection('form')" aria-label="Add New Permit"><i class="fas fa-plus" aria-hidden="true"></i> Add New Permit</button>
           </div>
         </div>
       </section>
@@ -122,7 +121,7 @@
           <div class="form-container">
             <div class="form-header">
               <h3 id="formTitle">Add New Parking Permit</h3>
-              <button onclick="showSection('permits')"><i class="fas fa-times"></i></button>
+              <button onclick="showSection('permits')" aria-label="Close Form"><i class="fas fa-times" aria-hidden="true"></i></button>
             </div>
             <div id="formError" class="error hidden"></div>
             <div id="formRemaining" class="info hidden"></div>
@@ -130,24 +129,24 @@
               <input type="hidden" id="editPermitId">
               <div class="grid form-grid">
                 <div>
-                  <label>Permit No. <span class="tooltip" title="Auto-generated">ℹ</span></label>
-                  <input type="text" id="permitNo" readonly>
+                  <label for="permitNo">Permit No. <span class="tooltip" title="Auto-generated">ℹ</span></label>
+                  <input type="text" id="permitNo" readonly aria-readonly="true">
                 </div>
                 <div>
-                  <label>Unit No.</label>
-                  <input type="text" id="unitNo" placeholder="1234/A" pattern="^\d{4}/[A-Z]$" required oninput="checkUnit()">
+                  <label for="unitNo">Unit No.</label>
+                  <input type="text" id="unitNo" placeholder="1234/A" pattern="^\d{4}/[A-Z]$" required oninput="checkUnit()" aria-required="true">
                 </div>
                 <div>
-                  <label>Visitor Name</label>
-                  <input type="text" id="visitorName" required>
+                  <label for="visitorName">Visitor Name</label>
+                  <input type="text" id="visitorName" required aria-required="true">
                 </div>
                 <div>
-                  <label>License Plate</label>
-                  <input type="text" id="licensePlate" required>
+                  <label for="licensePlate">License Plate</label>
+                  <input type="text" id="licensePlate" required aria-required="true">
                 </div>
                 <div>
-                  <label>Vehicle Make</label>
-                  <select id="vehicleMake" required>
+                  <label for="vehicleMake">Vehicle Make</label>
+                  <select id="vehicleMake" required aria-required="true">
                     <option value="">Select Make</option>
                     <option value="Toyota">Toyota</option>
                     <option value="Honda">Honda</option>
@@ -160,8 +159,8 @@
                   </select>
                 </div>
                 <div>
-                  <label>Vehicle Color</label>
-                  <select id="vehicleColor" required>
+                  <label for="vehicleColor">Vehicle Color</label>
+                  <select id="vehicleColor" required aria-required="true">
                     <option value="">Select Color</option>
                     <option value="Black">Black</option>
                     <option value="White">White</option>
@@ -174,12 +173,12 @@
                   </select>
                 </div>
                 <div>
-                  <label>Issue Officer</label>
-                  <select id="issueOfficer" required>
+                  <label for="issueOfficer">Issue Officer</label>
+                  <select id="issueOfficer" required aria-required="true">
                     <option value="">Select Officer</option>
-                    <option value="Jagroop">Jagroop</option>
+                    <option value="Muhammed Nayeeim">Muhammed Nayeeim</option>
                     <option value="Melbin">Melbin</option>
-                    <option value="Kartik">Kartik</option>
+                    <option value="Moses Mugisha">Moses Mugisha</option>
                     <option value="Abiy">Abiy</option>
                     <option value="Zamil">Zamil</option>
                     <option value="Abir">Abir</option>
@@ -187,18 +186,18 @@
                   </select>
                 </div>
                 <div>
-                  <label>Issue Date</label>
-                  <input type="date" id="issueDate" required>
+                  <label for="issueDate">Issue Date</label>
+                  <input type="date" id="issueDate" required aria-required="true">
                 </div>
                 <div>
-                  <label>Expire Date</label>
-                  <input type="date" id="expireDate" required>
+                  <label for="expireDate">Expire Date</label>
+                  <input type="date" id="expireDate" required aria-required="true">
                 </div>
               </div>
               <div class="form-actions">
-                <button type="button" onclick="resetForm()">Reset</button>
-                <button type="button" onclick="showSection('permits')">Cancel</button>
-                <button type="submit" id="savePermitBtn">Save Permit</button>
+                <button type="button" onclick="resetForm()" aria-label="Reset Form">Reset</button>
+                <button type="button" onclick="showSection('permits')" aria-label="Cancel Form">Cancel</button>
+                <button type="submit" id="savePermitBtn" aria-label="Save Permit">Save Permit</button>
               </div>
             </form>
           </div>
@@ -212,23 +211,23 @@
           <p>Search for permits or check remaining permits for specific units</p>
           <div class="grid">
             <div class="search-group">
-              <label>Search Permits</label>
+              <label for="searchPermits">Search Permits</label>
               <div class="search-bar">
-                <i class="fas fa-search"></i>
-                <input type="text" id="searchPermits" placeholder="Search by any field..." oninput="searchPermits()">
+                <i class="fas fa-search" aria-hidden="true"></i>
+                <input type="text" id="searchPermits" placeholder="Search by any field..." oninput="searchPermits()" aria-label="Search Permits">
               </div>
             </div>
             <div class="search-group">
-              <label>Check Remaining Permits</label>
+              <label for="unitSearchInput">Check Remaining Permits</label>
               <div class="search-bar">
-                <i class="fas fa-search"></i>
-                <input type="text" id="unitSearchInput" placeholder="Unit No. (e.g., 1234/A)" oninput="checkRemainingPermits()">
+                <i class="fas fa-search" aria-hidden="true"></i>
+                <input type="text" id="unitSearchInput" placeholder="Unit No. (e.g., 1234/A)" oninput="checkRemainingPermits()" aria-label="Check Remaining Permits">
               </div>
               <div id="unitSearchResult" class="info hidden"></div>
             </div>
           </div>
           <div class="search-actions">
-            <button class="btn-secondary" onclick="clearSearch()"><i class="fas fa-times"></i> Clear Search</button>
+            <button class="btn-secondary" onclick="clearSearch()" aria-label="Clear Search"><i class="fas fa-times" aria-hidden="true"></i> Clear Search</button>
           </div>
           <div id="searchResults" class="table-container hidden">
             <table id="permitsTable">
@@ -245,9 +244,9 @@
               <tbody id="permitsTableBody"></tbody>
             </table>
             <div class="pagination">
-              <button onclick="prevPage()" id="prevPageBtn" disabled><i class="fas fa-chevron-left"></i> Previous</button>
+              <button onclick="prevPage()" id="prevPageBtn" disabled aria-label="Previous Page"><i class="fas fa-chevron-left" aria-hidden="true"></i> Previous</button>
               <span id="pageInfo">Page 1</span>
-              <button onclick="nextPage()" id="nextPageBtn">Next <i class="fas fa-chevron-right"></i></button>
+              <button onclick="nextPage()" id="nextPageBtn" aria-label="Next Page">Next <i class="fas fa-chevron-right" aria-hidden="true"></i></button>
             </div>
           </div>
         </div>
@@ -261,28 +260,28 @@
             <p>Encountered a problem? Submit your issue below:</p>
             <form id="issueForm" onsubmit="submitIssue(event)">
               <div class="search-group">
-                <label>Your Name</label>
-                <input type="text" id="reportUsername" placeholder="Enter your name" required>
+                <label for="reportUsername">Your Name</label>
+                <input type="text" id="reportUsername" placeholder="Enter your name" required aria-required="true">
               </div>
               <div class="search-group">
-                <label>Issue Description <span id="charCount">0/500</span></label>
-                <textarea id="issueDescription" placeholder="Describe the issue..." maxlength="500" required oninput="updateCharCount()"></textarea>
+                <label for="issueDescription">Issue Description <span id="charCount">0/500</span></label>
+                <textarea id="issueDescription" placeholder="Describe the issue..." maxlength="500" required oninput="updateCharCount()" aria-required="true"></textarea>
               </div>
-              <button class="btn-primary" type="submit"><i class="fas fa-paper-plane"></i> Submit Issue</button>
+              <button class="btn-primary" type="submit" aria-label="Submit Issue"><i class="fas fa-paper-plane" aria-hidden="true"></i> Submit Issue</button>
             </form>
           </div>
           <div id="adminAuth" class="hidden">
             <p>Enter admin password to view and manage issues:</p>
             <div class="search-group">
-              <label>Admin Password</label>
-              <input type="password" id="adminPassword" placeholder="Enter admin password">
+              <label for="adminPassword">Admin Password</label>
+              <input type="password" id="adminPassword" placeholder="Enter admin password" aria-label="Admin Password">
             </div>
-            <button class="btn-primary" onclick="loginAsAdmin()"><i class="fas fa-lock"></i> Login as Admin</button>
+            <button class="btn-primary" onclick="loginAsAdmin()" aria-label="Login as Admin"><i class="fas fa-lock" aria-hidden="true"></i> Login as Admin</button>
           </div>
           <div id="adminIssues" class="table-container hidden">
             <div class="section-header">
               <h3>Reported Issues (Admin View)</h3>
-              <button class="btn-secondary" onclick="clearSolvedIssues()"><i class="fas fa-trash"></i> Clear Solved Issues</button>
+              <button class="btn-secondary" onclick="clearSolvedIssues()" aria-label="Clear Solved Issues"><i class="fas fa-trash" aria-hidden="true"></i> Clear Solved Issues</button>
             </div>
             <table id="issuesTable">
               <thead>
@@ -300,29 +299,33 @@
         </div>
       </section>
 
-      <!-- About Section -->
-      <section id="about" class="section hidden">
-        <div class="container">
-          <h2>About Rainbow Parking</h2>
-          <p>Welcome to the Rainbow Parking System, a smart solution designed by Jagroop Singh for Rainbow Village. This system streamlines visitor parking management with features like automated permit issuance, unit-based permit tracking, and issue reporting for efficient community parking.</p>
-          <h3>Security Team</h3>
-          <ul class="security-list">
-            <li>Jagroop Singh</li>
-            <li>Melbin Thomas</li>
-            <li>Kartik Sharma</li>
-            <li>Abiy Tesfaye</li>
-            <li>Zamil Khan</li>
-            <li>Abir Hassan</li>
-            <li>Bhupinder Singh</li>
-          </ul>
-        </div>
-      </section>
-    </main>
+<!-- About Section -->
+<section id="about" class="section hidden about-sigma">
+  <div class="about-container">
+    <h2>About Rainbow Parking System</h2>
+
+    <p>
+      <span class="highlight-bold">Rainbow Parking</span> is a mission-driven web platform created voluntarily by <span class="highlight-author">Jagroop Singh</span>. This system was designed with one clear purpose: to empower the security team of Rainbow Village to manage visitor parking with absolute clarity, speed, and accuracy — without chaos, confusion, or compromise.
+    </p>
+
+    <p>
+      <strong class="highlight-em">No money was taken. None expected.</strong> This solution was built out of dedication — not demand. It simplifies permit issuance, allows detailed unit tracking, and even lets users report issues directly. All engineered with thoughtful logic and a clean UI to make daily operations smarter and smoother.
+    </p>
+
+    <p class="italic-note">
+      Future updates and support are not guaranteed. If upgrades are required, please reach out to the developer. Response will depend on availability — not entitlement.
+    </p>
+
+    <div class="footer-message">
+      <p>© All rights reserved by Jagroop Singh — <span class="code-text">Built with discipline. Deployed with precision.</span></p>
+    </div>
   </div>
+</section>
+
 
   <!-- Toast Notification -->
   <div id="toast" class="toast hidden">
-    <i id="toastIcon" class="fas"></i>
+    <i id="toastIcon" class="fas" aria-hidden="true"></i>
     <span id="toastMessage"></span>
   </div>
 
@@ -332,14 +335,57 @@
     let permits = [];
     let issues = [];
     let updates = [];
-    let currentUser = null;
     let isAdmin = false;
     const ADMIN_PASSWORD = "3343";
-    const ITEMS_PER_PAGE = 5;
+    const ITEMS_PER_PAGE = 25;
     let currentPage = 1;
     let filteredPermits = [];
 
-    const request = indexedDB.open('ParkingDB', 3); // Updated version to 3 for new object store
+    // Utility function to get current date in YYYY-MM-DD format (EDT)
+    function getCurrentDate() {
+      const now = new Date();
+      const edtDate = new Date(now.toLocaleString('en-US', { timeZone: 'America/New_York' }));
+      const year = edtDate.getFullYear();
+      const month = String(edtDate.getMonth() + 1).padStart(2, '0');
+      const day = String(edtDate.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    }
+
+    // Utility function to add days to a date
+    function addDays(dateStr, days) {
+      const date = new Date(dateStr);
+      date.setDate(date.getDate() + days);
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    }
+
+    // Utility function to format date for display
+    function formatDate(dateStr) {
+      const date = new Date(`${dateStr}T00:00:00-04:00`);
+      return date.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+        timeZone: 'America/New_York'
+      });
+    }
+
+    // Utility function to check if a date is today
+    function isToday(dateStr) {
+      const date = new Date(`${dateStr}T00:00:00-04:00`);
+      const today = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/New_York' }));
+      return date.toISOString().split('T')[0] === today.toISOString().split('T')[0];
+    }
+
+    // Utility function to check if a permit is active
+    function isPermitActive(expireDate) {
+      const currentDate = getCurrentDate();
+      return expireDate >= currentDate;
+    }
+
+    const request = indexedDB.open('ParkingDB', 3);
 
     request.onupgradeneeded = function(event) {
       db = event.target.result;
@@ -385,9 +431,35 @@
       const request = store.getAll();
 
       request.onsuccess = function() {
+        const today = getCurrentDate();
+        const expire30Days = addDays(today, 30);
+        const expire15Days = addDays(today, 15);
+
         permits = request.result.length ? request.result : [
-          { id: 1, permitNo: "P001", unitNo: "1234/A", visitorName: "John Doe", licensePlate: "ABC123", vehicleMake: "Toyota", vehicleColor: "Blue", issueDate: "2025-03-01", expireDate: "2025-03-31", issueOfficer: "Jagroop" },
-          { id: 2, permitNo: "P002", unitNo: "5678/B", visitorName: "Jane Smith", licensePlate: "XYZ789", vehicleMake: "Honda", vehicleColor: "Red", issueDate: "2025-03-02", expireDate: "2025-03-15", issueOfficer: "Melbin" }
+          {
+            id: 1,
+            permitNo: "P001",
+            unitNo: "1234/A",
+            visitorName: "John Doe",
+            licensePlate: "ABC123",
+            vehicleMake: "Toyota",
+            vehicleColor: "Blue",
+            issueDate: today,
+            expireDate: expire30Days,
+            issueOfficer: "Muhammed Nayeeim"
+          },
+          {
+            id: 2,
+            permitNo: "P002",
+            unitNo: "5678/B",
+            visitorName: "Jane Smith",
+            licensePlate: "XYZ789",
+            vehicleMake: "Honda",
+            vehicleColor: "Red",
+            issueDate: today,
+            expireDate: expire15Days,
+            issueOfficer: "Melbin"
+          }
         ];
         if (!request.result.length) {
           const writeTransaction = db.transaction(['permits'], 'readwrite');
@@ -442,16 +514,15 @@
     }
 
     function updateDashboardMetrics() {
-      const today = new Date().toISOString().split('T')[0];
+      const today = getCurrentDate();
       const totalPermits = permits.length;
-      const todayPermits = permits.filter(p => p.issueDate === today).length;
+      const todayPermits = permits.filter(p => isToday(p.issueDate)).length;
       const openIssues = issues.filter(i => i.status !== 'solved').length;
 
       animateCount('totalPermits', totalPermits);
       animateCount('todayPermits', todayPermits);
       animateCount('openIssues', openIssues);
 
-      // Show/hide update form based on admin status
       document.getElementById('addUpdateForm').classList.toggle('hidden', !isAdmin);
     }
 
@@ -472,19 +543,20 @@
 
     function refreshMetrics() {
       showLoadingSpinner();
-      updateDashboardMetrics();
+      loadPermitsFromDB();
+      loadIssuesFromDB();
+      loadUpdatesFromDB();
       showToast('Metrics refreshed successfully!');
-      hideLoadingSpinner();
     }
 
     function updatePermitNo() {
       const permitNo = `P${getNextPermitNo()}`;
       document.getElementById('permitNo').value = permitNo;
-      const today = new Date().toISOString().split('T')[0];
-      const expire = new Date();
-      expire.setDate(expire.getDate() + 30);
+      const today = getCurrentDate();
+      const expireDate = addDays(today, 30);
       document.getElementById('issueDate').value = today;
-      document.getElementById('expireDate').value = expire.toISOString().split('T')[0];
+      document.getElementById('expireDate').value = expireDate;
+      showToast('Dates set to EDT (America/New_York).', 'info');
     }
 
     function showSection(sectionId) {
@@ -524,6 +596,12 @@
         p.vehicleColor.toLowerCase().includes(query) ||
         p.issueOfficer.toLowerCase().includes(query)
       );
+      // Sort by permitNo in descending order (latest permit at top)
+      filteredPermits.sort((a, b) => {
+        const numA = parseInt(a.permitNo.slice(1));
+        const numB = parseInt(b.permitNo.slice(1));
+        return numB - numA;
+      });
       currentPage = 1;
       loadSearchResults();
     }
@@ -538,10 +616,13 @@
         <tr>
           <td>${highlightText(p.permitNo, document.getElementById('searchPermits').value)}<br><span>${highlightText(p.visitorName, document.getElementById('searchPermits').value)} (${highlightText(p.unitNo, document.getElementById('searchPermits').value)})</span></td>
           <td>${highlightText(p.licensePlate, document.getElementById('searchPermits').value)}<br><span>${highlightText(p.vehicleMake, document.getElementById('searchPermits').value)} - ${highlightText(p.vehicleColor, document.getElementById('searchPermits').value)}</span></td>
-          <td><i class="fas fa-calendar"></i> ${new Date(p.issueDate).toLocaleDateString()} - ${new Date(p.expireDate).toLocaleDateString()}</td>
+          <td><i class="fas fa-calendar" aria-hidden="true"></i> ${formatDate(p.issueDate)} - ${formatDate(p.expireDate)}</td>
           <td>${highlightText(p.issueOfficer, document.getElementById('searchPermits').value)}</td>
-          <td><span class="status ${new Date(p.expireDate) > new Date() ? 'active' : 'expired'}">${new Date(p.expireDate) > new Date() ? 'Active' : 'Expired'}</span></td>
-          <td><button class="btn-primary" onclick="editPermit(${p.id})"><i class="fas fa-edit"></i> Edit</button></td>
+          <td><span class="status ${isPermitActive(p.expireDate) ? 'active' : 'expired'}">${isPermitActive(p.expireDate) ? 'Active' : 'Expired'}</span></td>
+          <td>
+            <button class="btn-primary" onclick="editPermit(${p.id})" aria-label="Edit Permit ${p.permitNo}"><i class="fas fa-edit" aria-hidden="true"></i> Edit</button>
+            ${isAdmin ? `<button class="btn-secondary" onclick="deletePermit(${p.id})" aria-label="Delete Permit ${p.permitNo}"><i class="fas fa-trash" aria-hidden="true"></i> Delete</button>` : ''}
+          </td>
         </tr>
       `).join('');
 
@@ -579,7 +660,11 @@
       document.getElementById('searchPermits').value = '';
       document.getElementById('unitSearchInput').value = '';
       document.getElementById('unitSearchResult').classList.add('hidden');
-      filteredPermits = permits;
+      filteredPermits = permits.slice().sort((a, b) => {
+        const numA = parseInt(a.permitNo.slice(1));
+        const numB = parseInt(b.permitNo.slice(1));
+        return numB - numA;
+      });
       currentPage = 1;
       loadSearchResults();
     }
@@ -588,12 +673,15 @@
       const unitNo = document.getElementById('unitSearchInput').value.toUpperCase();
       const regex = /^\d{4}\/[A-Z]$/;
       const remainingDiv = document.getElementById('unitSearchResult');
+      const currentDate = getCurrentDate();
       if (regex.test(unitNo)) {
-        const remaining = 7 - permits.filter(p => p.unitNo.toUpperCase() === unitNo).length;
+        const activePermits = permits.filter(p => p.unitNo.toUpperCase() === unitNo && isPermitActive(p.expireDate)).length;
+        const remaining = 7 - activePermits;
         remainingDiv.textContent = `${remaining} permit${remaining !== 1 ? 's' : ''} remaining`;
         remainingDiv.classList.remove('hidden');
       } else {
-        remainingDiv.classList.add('hidden');
+        remainingDiv.textContent = 'Please enter a valid unit number (e.g., 1234/A)';
+        remainingDiv.classList.remove('hidden');
       }
     }
 
@@ -602,25 +690,20 @@
       const regex = /^\d{4}\/[A-Z]$/;
       const remainingDiv = document.getElementById('formRemaining');
       const errorDiv = document.getElementById('formError');
-      const submitBtn = document.getElementById('savePermitBtn');
       const unitInput = document.getElementById('unitNo');
+      const currentDate = getCurrentDate();
 
       if (regex.test(unitNo)) {
-        const remaining = 7 - permits.filter(p => p.unitNo.toUpperCase() === unitNo).length;
+        const activePermits = permits.filter(p => p.unitNo.toUpperCase() === unitNo && isPermitActive(p.expireDate)).length;
+        const remaining = 7 - activePermits;
         remainingDiv.textContent = `This unit has ${remaining} permit${remaining !== 1 ? 's' : ''} remaining`;
         remainingDiv.classList.remove('hidden');
-        submitBtn.disabled = remaining <= 0;
         unitInput.classList.remove('invalid');
-        if (remaining <= 0) {
-          errorDiv.textContent = 'Monthly permit limit reached';
-          errorDiv.classList.remove('hidden');
-        } else {
-          errorDiv.classList.add('hidden');
-        }
+        errorDiv.classList.add('hidden');
       } else {
         remainingDiv.classList.add('hidden');
-        submitBtn.disabled = false;
-        errorDiv.classList.add('hidden');
+        errorDiv.textContent = 'Please enter a valid unit number (e.g., 1234/A)';
+        errorDiv.classList.remove('hidden');
         unitInput.classList.add('invalid');
       }
     }
@@ -659,13 +742,41 @@
       showSection('form');
     }
 
+    function deletePermit(permitId) {
+      if (!isAdmin) {
+        showToast('Admin access required to delete permits.', 'error');
+        return;
+      }
+      if (!confirm('Are you sure you want to delete this permit? This action cannot be undone.')) return;
+
+      showLoadingSpinner();
+      const transaction = db.transaction(['permits'], 'readwrite');
+      const store = transaction.objectStore('permits');
+      const request = store.delete(permitId);
+
+      request.onsuccess = function() {
+        permits = permits.filter(p => p.id !== permitId);
+        updateDashboardMetrics();
+        searchPermits();
+        showToast('Permit deleted successfully.');
+        hideLoadingSpinner();
+      };
+
+      request.onerror = function() {
+        showToast('Error deleting permit.', 'error');
+        hideLoadingSpinner();
+      };
+    }
+
     function submitPermit(event) {
       event.preventDefault();
       const editPermitId = document.getElementById('editPermitId').value;
       const unitNo = document.getElementById('unitNo').value.toUpperCase();
-      const licensePlate = document.getElementById('licensePlate').value.toUpperCase();
-      const issueDate = new Date(document.getElementById('issueDate').value);
-      const expireDate = new Date(document.getElementById('expireDate').value);
+      const visitorName = document.getElementById('visitorName').value.trim();
+      const licensePlate = document.getElementById('licensePlate').value.toUpperCase().trim();
+      const issueDate = document.getElementById('issueDate').value;
+      const expireDate = document.getElementById('expireDate').value;
+      const currentDate = getCurrentDate();
 
       // Validation checks
       const form = document.getElementById('permitForm');
@@ -679,24 +790,40 @@
         }
       });
 
-      if (!isValid) {
+      if (!isValid || !visitorName || !licensePlate) {
         showToast('Please fill in all required fields correctly.', 'error');
         return;
       }
 
-      if (!editPermitId && 7 - permits.filter(p => p.unitNo.toUpperCase() === unitNo).length <= 0) {
-        showToast('Permit limit reached for this unit.', 'error');
+      if (issueDate > currentDate) {
+        showToast('Issue date cannot be in the future.', 'error');
         return;
       }
 
-      const existingPermit = permits.find(p => p.licensePlate.toUpperCase() === licensePlate && new Date(p.expireDate) > new Date() && (!editPermitId || p.id != editPermitId));
-      if (existingPermit) {
-        showToast('Active permit exists for this license plate.', 'error');
+      if (expireDate <= currentDate) {
+        showToast('Expiry date must be after today.', 'error');
         return;
       }
 
       if (issueDate >= expireDate) {
-        showToast('Expire date must be after issue date.', 'error');
+        showToast('Expiry date must be after issue date.', 'error');
+        return;
+      }
+
+      // Check for unit limit and existing license plate
+      let warningMessage = '';
+      const activePermits = permits.filter(p => p.unitNo.toUpperCase() === unitNo && isPermitActive(p.expireDate) && (!editPermitId || p.id !== parseInt(editPermitId))).length;
+      const remainingPermits = 7 - activePermits;
+      const existingPermit = permits.find(p => p.licensePlate.toUpperCase() === licensePlate && isPermitActive(p.expireDate) && (!editPermitId || p.id !== parseInt(editPermitId)));
+
+      if (!editPermitId && remainingPermits <= 0) {
+        warningMessage += 'This unit has reached its permit limit (7 permits). ';
+      }
+      if (existingPermit) {
+        warningMessage += 'An active permit already exists for this license plate. ';
+      }
+
+      if (warningMessage && !confirm(`${warningMessage}Do you want to proceed with adding this permit?`)) {
         return;
       }
 
@@ -705,12 +832,12 @@
       const permitData = {
         permitNo: document.getElementById('permitNo').value,
         unitNo: unitNo,
-        visitorName: document.getElementById('visitorName').value,
+        visitorName: visitorName,
         licensePlate: licensePlate,
         vehicleMake: document.getElementById('vehicleMake').value,
         vehicleColor: document.getElementById('vehicleColor').value,
-        issueDate: document.getElementById('issueDate').value,
-        expireDate: document.getElementById('expireDate').value,
+        issueDate: issueDate,
+        expireDate: expireDate,
         issueOfficer: document.getElementById('issueOfficer').value
       };
 
@@ -723,7 +850,7 @@
         const request = store.put(permitData);
 
         request.onsuccess = function() {
-          const index = permits.findIndex(p => p.id == editPermitId);
+          const index = permits.findIndex(p => p.id === parseInt(editPermitId));
           permits[index] = permitData;
           showSection('unit-search');
           updateDashboardMetrics();
@@ -742,7 +869,7 @@
         request.onsuccess = function() {
           permitData.id = request.result;
           permits.push(permitData);
-          showSection('permits');
+          showSection('unit-search');
           updateDashboardMetrics();
           showToast('Permit saved successfully!');
           resetForm();
@@ -789,7 +916,7 @@
         reportedBy: username,
         description: description,
         status: 'open',
-        createdAt: new Date().toISOString()
+        createdAt: new Date().toLocaleString('en-US', { timeZone: 'America/New_York' })
       };
 
       showLoadingSpinner();
@@ -838,7 +965,7 @@
           <td>${i.description}</td>
           <td><span class="status ${i.status === 'solved' ? 'active' : 'expired'}">${i.status === 'solved' ? 'Solved' : 'Open'}</span></td>
           <td>
-            ${i.status !== 'solved' ? `<button class="btn-primary" onclick="markIssueSolved(${i.id})"><i class="fas fa-check"></i> Mark as Solved</button>` : ''}
+            ${i.status !== 'solved' ? `<button class="btn-primary" onclick="markIssueSolved(${i.id})" aria-label="Mark Issue ${i.id} as Solved"><i class="fas fa-check" aria-hidden="true"></i> Mark as Solved</button>` : ''}
           </td>
         </tr>
       `).join('');
@@ -849,6 +976,7 @@
       if (!issue) return;
 
       issue.status = 'solved';
+      issue.resolvedAt = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' });
       showLoadingSpinner();
       const transaction = db.transaction(['issues'], 'readwrite');
       const store = transaction.objectStore('issues');
@@ -908,7 +1036,7 @@
 
       const newUpdate = {
         message: message,
-        createdAt: new Date().toISOString()
+        createdAt: new Date().toLocaleString('en-US', { timeZone: 'America/New_York' })
       };
 
       showLoadingSpinner();
@@ -933,11 +1061,11 @@
 
     function displayUpdates() {
       const updatesList = document.getElementById('updatesList');
-      updates.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)); // Sort by latest first
+      updates.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
       updatesList.innerHTML = updates.length ? updates.map(u => `
         <div class="update-item">
           <p>${u.message}</p>
-          <span>${new Date(u.createdAt).toLocaleString()}</span>
+          <span>${new Date(u.createdAt).toLocaleString('en-US', { timeZone: 'America/New_York' })}</span>
         </div>
       `).join('') : '<p>No updates available.</p>';
     }
@@ -948,15 +1076,10 @@
       const toastMessage = document.getElementById('toastMessage');
       toastMessage.textContent = message;
       toast.className = `toast ${type}`;
-      toastIcon.className = `fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}`;
+      toastIcon.className = `fas ${type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle'}`;
       toast.classList.remove('hidden');
       setTimeout(() => toast.classList.add('hidden'), 3000);
     }
-
-    // Auto-reload every 1 minute (60 seconds)
-    setInterval(() => {
-      location.reload();
-    }, 60000);
   </script>
 </body>
 </html>
