@@ -145,19 +145,63 @@
                   <input type="text" id="licensePlate" required aria-required="true">
                 </div>
                 <div>
-                  <label for="vehicleMake">Vehicle Make</label>
-                  <select id="vehicleMake" required aria-required="true">
-                    <option value="">Select Make</option>
-                    <option value="Toyota">Toyota</option>
-                    <option value="Honda">Honda</option>
-                    <option value="Ford">Ford</option>
-                    <option value="BMW">BMW</option>
-                    <option value="Mercedes">Mercedes</option>
-                    <option value="Tesla">Tesla</option>
-                    <option value="Volkswagen">Volkswagen</option>
-                    <option value="Hyundai">Hyundai</option>
-                  </select>
-                </div>
+  <label for="vehicleMake">Vehicle Make</label>
+  <select id="vehicleMake" required aria-required="true">
+    <option value="">Select Make</option>
+    <!-- Mainstream Passenger Vehicles -->
+    <option value="Acura">Acura</option>
+    <option value="Alfa Romeo">Alfa Romeo</option>
+    <option value="Audi">Audi</option>
+    <option value="BMW">BMW</option>
+    <option value="Buick">Buick</option>
+    <option value="Cadillac">Cadillac</option>
+    <option value="Chevrolet">Chevrolet</option>
+    <option value="Chrysler">Chrysler</option>
+    <option value="Dodge">Dodge</option>
+    <option value="Ferrari">Ferrari</option>
+    <option value="Fiat">Fiat</option>
+    <option value="Ford">Ford</option>
+    <option value="GMC">GMC</option>
+    <option value="Honda">Honda</option>
+    <option value="Hyundai">Hyundai</option>
+    <option value="Infiniti">Infiniti</option>
+    <option value="Jaguar">Jaguar</option>
+    <option value="Jeep">Jeep</option>
+    <option value="Kia">Kia</option>
+    <option value="Land Rover">Land Rover</option>
+    <option value="Lexus">Lexus</option>
+    <option value="Lincoln">Lincoln</option>
+    <option value="Maserati">Maserati</option>
+    <option value="Mazda">Mazda</option>
+    <option value="Mercedes">Mercedes</option>
+    <option value="Mini">Mini</option>
+    <option value="Mitsubishi">Mitsubishi</option>
+    <option value="Nissan">Nissan</option>
+    <option value="Ram">Ram</option>
+    <option value="Subaru">Subaru</option>
+    <option value="Tesla">Tesla</option>
+    <option value="Toyota">Toyota</option>
+    <option value="Volkswagen">Volkswagen</option>
+    <option value="Volvo">Volvo</option>
+
+    <!-- Commercial & Specialty Vehicles -->
+    <option value="Sicon">Sicon</option>
+    <option value="Freightliner">Freightliner</option>
+    <option value="Peterbilt">Peterbilt</option>
+    <option value="Kenworth">Kenworth</option>
+    <option value="International">International</option>
+    <option value="Mack">Mack</option>
+    <option value="Western Star">Western Star</option>
+    <option value="Isuzu">Isuzu</option>
+    <option value="Hino">Hino</option>
+    <option value="Terex">Terex</option>
+    <option value="Caterpillar">Caterpillar</option>
+    <option value="Autocar">Autocar</option>
+    <option value="GMC Commercial">GMC Commercial</option>
+    <option value="Ford Commercial">Ford Commercial</option>
+  </select>
+</div>
+
                 <div>
                   <label for="vehicleColor">Vehicle Color</label>
                   <select id="vehicleColor" required aria-required="true">
@@ -439,26 +483,26 @@
           {
             id: 1,
             permitNo: "P001",
-            unitNo: "1234/A",
-            visitorName: "John Doe",
-            licensePlate: "ABC123",
-            vehicleMake: "Toyota",
-            vehicleColor: "Blue",
+            unitNo: "1234/B",
+            visitorName: "-------",
+            licensePlate: "TEST",
+            vehicleMake: "TEST",
+            vehicleColor: "TEST",
             issueDate: today,
             expireDate: expire30Days,
-            issueOfficer: "Muhammed Nayeeim"
+            issueOfficer: "JAGROOP SINGH"
           },
           {
             id: 2,
             permitNo: "P002",
-            unitNo: "5678/B",
-            visitorName: "Jane Smith",
-            licensePlate: "XYZ789",
-            vehicleMake: "Honda",
-            vehicleColor: "Red",
+            unitNo: "1234/A",
+            visitorName: "-------------",
+            licensePlate: "PUNJAB PRODUCTION",
+            vehicleMake: "TEST",
+            vehicleColor: "TEST",
             issueDate: today,
             expireDate: expire15Days,
-            issueOfficer: "Melbin"
+            issueOfficer: "Jagroop Singh"
           }
         ];
         if (!request.result.length) {
